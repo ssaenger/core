@@ -1,5 +1,6 @@
 """Coordinator for Sonarr."""
 from __future__ import annotations
+from typing import Any
 
 import asyncio
 from datetime import timedelta
@@ -37,10 +38,14 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
         hass: HomeAssistant,
         *,
         sonarr: Sonarr,
-        options: dict = {},
+        options: dict[str, Any] = None
     ) -> None:
         """Initialize global Sonarr data updater."""
         self.sonarr = sonarr
+
+        if options is None:
+            options = {}
+
         self.upcoming_days = options.get(
             CONF_UPCOMING_DAYS, DEFAULT_UPCOMING_DAYS
         )
