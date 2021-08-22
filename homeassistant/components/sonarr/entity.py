@@ -1,8 +1,6 @@
 """Base Entity for Sonarr."""
 from __future__ import annotations
 
-from sonarr import Sonarr
-
 from homeassistant.const import (
     ATTR_IDENTIFIERS,
     ATTR_MANUFACTURER,
