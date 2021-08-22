@@ -78,7 +78,7 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
             start = dt_util.as_utc(local)
             end = start + timedelta(days=self.upcoming_days)
 
-            return self.sonarr.upcoming(start=start.isoformat(), end=end.isoformat())
+            return self.sonarr.calendar(start=start.isoformat(), end=end.isoformat())
         if datapoint == "wanted":
             return self.sonarr.wanted(page_size=self.wanted_max_items)
 
