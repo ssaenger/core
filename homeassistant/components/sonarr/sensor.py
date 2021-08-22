@@ -60,7 +60,6 @@ class SonarrSensor(SonarrEntity, SensorEntity):
         self._attr_unique_id = f"{entry_id}_{key}"
         self._attr_native_unit_of_measurement = unit_of_measurement
         self._attr_entity_registry_enabled_default = enabled_default
-        self.last_update_success = False
 
         super().__init__(
             coordinator=coordinator,
