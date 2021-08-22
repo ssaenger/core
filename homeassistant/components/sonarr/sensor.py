@@ -160,7 +160,7 @@ class SonarrDiskspaceSensor(SonarrSensor):
         """Return the state of the sensor."""
         app = self.coordinator.sonarr.app
         total_free = sum(disk.free for disk in app.disks)
-        free = self._total_free / 1024 ** 3
+        free = total_free / 1024 ** 3
         return f"{free:.2f}"
 
 
