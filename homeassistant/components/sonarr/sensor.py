@@ -23,7 +23,6 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up Sonarr sensors based on a config entry."""
-    options = entry.options
     coordinator: SonarrDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
 
     entities = [
