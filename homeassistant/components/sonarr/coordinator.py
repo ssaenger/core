@@ -75,11 +75,11 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
         """Fetch datapoint from its respective endpoint."""
         if datapoint == "commands":
             return self.sonarr.commands()
-        elif datapoint == "queue":
+        if datapoint == "queue":
             return self.sonarr.queue()
-        elif datapoint == "series":
+        if datapoint == "series":
             return self.sonarr.series()
-        elif datapoint == "upcoming":
+        if datapoint == "upcoming":
             local = dt_util.start_of_local_day().replace(microsecond=0)
             start = dt_util.as_utc(local)
             end = start + timedelta(days=self.upcoming_days)
@@ -87,7 +87,7 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
             return self.sonarr.upcoming(
                 start=start.isoformat(), end=end.isoformat()
             )
-        elif datapoint == "wanted":
+        if datapoint == "wanted":
             return self.sonarr.wanted(page_size=self.wanted_max_items)
 
         return None
