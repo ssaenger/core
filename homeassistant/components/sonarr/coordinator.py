@@ -1,10 +1,10 @@
 """Coordinator for Sonarr."""
 from __future__ import annotations
-from typing import Any
 
 import asyncio
 from datetime import timedelta
 import logging
+from typing import Any
 
 from sonarr import Sonarr, SonarrAccessRestricted, SonarrError
 
