@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import logging
 
-from sonarr import Sonarr, SonarrError
+from sonarr import Sonarr
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
@@ -14,7 +14,6 @@ from homeassistant.const import (
     CONF_VERIFY_SSL,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .const import (
