@@ -65,7 +65,7 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
         """Disable collection of a datapoint from its respective endpoint."""
         self.datapoints.remove(datapoint)
 
-    async def get_datapoint(self, datapoint: str):
+    def get_datapoint(self, datapoint: str):
         """Fetch datapoint from its respective endpoint."""
         if datapoint == "commands":
             return self.sonarr.commands()
