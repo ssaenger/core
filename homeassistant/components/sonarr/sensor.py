@@ -34,7 +34,7 @@ async def async_setup_entry(
         SonarrWantedSensor(coordinator, entry.entry_id),
     ]
 
-    async_add_entities(entities, False)
+    async_add_entities(entities, True)
 
 
 class SonarrSensor(SonarrEntity, SensorEntity):
@@ -68,13 +68,15 @@ class SonarrSensor(SonarrEntity, SensorEntity):
             device_id=entry_id,
         )
 
-    async def async_added_to_hass(self) -> None:
-        """Enable additional datapoint for sensor data."""
+    async def async_update(self) -> None:
+        """Update the entity."""
+        if not self.enabled:
+            return
+
         if self._datapoint:
             self.coordinator.enable_datapoint(self._datapoint)
-            await self.coordinator.async_refresh()
 
-        await super().async_added_to_hass()
+        await super().async_update()
 
     async def async_will_remove_from_hass(self) -> None:
         """Disable additional datapoint for sensor data."""
