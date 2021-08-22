@@ -34,11 +34,7 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
     wanted_max_items: int
 
     def __init__(
-        self,
-        hass: HomeAssistant,
-        *,
-        sonarr: Sonarr,
-        options: dict[str, Any] = None
+        self, hass: HomeAssistant, *, sonarr: Sonarr, options: dict[str, Any] = None
     ) -> None:
         """Initialize global Sonarr data updater."""
         self.sonarr = sonarr
@@ -46,9 +42,7 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
         if options is None:
             options = {}
 
-        self.upcoming_days = options.get(
-            CONF_UPCOMING_DAYS, DEFAULT_UPCOMING_DAYS
-        )
+        self.upcoming_days = options.get(CONF_UPCOMING_DAYS, DEFAULT_UPCOMING_DAYS)
         self.wanted_max_items = options.get(
             CONF_WANTED_MAX_ITEMS, DEFAULT_WANTED_MAX_ITEMS
         )
@@ -84,9 +78,7 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
             start = dt_util.as_utc(local)
             end = start + timedelta(days=self.upcoming_days)
 
-            return self.sonarr.upcoming(
-                start=start.isoformat(), end=end.isoformat()
-            )
+            return self.sonarr.upcoming(start=start.isoformat(), end=end.isoformat())
         if datapoint == "wanted":
             return self.sonarr.wanted(page_size=self.wanted_max_items)
 
@@ -101,7 +93,10 @@ class SonarrDataUpdateCoordinator(DataUpdateCoordinator[dict]):
                 zip(
                     self.datapoints,
                     await asyncio.gather(
-                        *(self.get_datapoint(datapoint) for datapoint in self.datapoints),
+                        *(
+                            self.get_datapoint(datapoint)
+                            for datapoint in self.datapoints
+                        ),
                     ),
                 )
             )
